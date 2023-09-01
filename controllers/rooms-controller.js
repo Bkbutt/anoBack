@@ -7,7 +7,7 @@ const User = require('../models/user-model'
 class RoomsController {
     async create(req, res) {
         // room
-        const { hostid,topic, roomType ,  date, time,speakersAllowed} = req.body;
+        const { topic, roomType ,ownerId,  date, time,speakersAllowed} = req.body;
 
         if (!topic || !roomType ||!date ||!time) {
             return res
@@ -19,7 +19,7 @@ class RoomsController {
         const room = await roomService.create({
             topic,
             roomType,
-            ownerId: hostid/'64ae8e584ec706c8581d886b',//req.user._id
+            ownerId,//'64ae8e584ec706c8581d886b',//req.user._id
             date,
             time,
             speakersAllowed,
@@ -114,7 +114,7 @@ const currentime = `${hours.toString().padStart(2, '0')}:${minutes.toString().pa
             await room.save()
           }
          const already= room.speakers.map((speaker)=>  speaker === user)
-          if(already.length>0){
+          if(already.length>1){
             return res.json({msg:"user already in meeting speakers"})
           }
           

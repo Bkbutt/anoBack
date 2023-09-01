@@ -6,7 +6,7 @@ const roomSchema = new Schema(
         topic: { type: String, required: true },
         roomType: { type: String, required: true },
         ownerId: { type: Schema.Types.ObjectId, ref: 'User' },//meeting host
-        speakers: {type: [  { type: Schema.Types.ObjectId,ref: 'User', },], required: false, },//room members,
+        speakers: {type: Array, required: false, },//room members,
         date:{type:String},
         time:{type:String},
         speakersAllowed:{type:Number}
